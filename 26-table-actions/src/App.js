@@ -2,18 +2,7 @@ import { useState,useEffect } from 'react'
 import { DataGrid } from '@material-ui/data-grid';
 import './App.css';
 
-const columns = [
-  { field: 'name', headerName: 'Nome', width: 150 },
-  { field: 'surname', headerName: 'Cognome', width: 150 },
-  { field: 'fullName',
-    width: 160,
-    headerName: 'Full name',
-    valueGetter: (params) =>{
-      console.log(params)
-      return params.row.name + " " +params.row.surname
-    }
-  },
-]
+
 
 function App() {
 
@@ -24,6 +13,48 @@ function App() {
   useEffect(()=>{
     loadData()
   }, [])
+
+  const onEditClick = (params, e)=>{
+    console.log("Editing", params)
+    // Cambio di routing
+  }
+
+  const onDeleteClick = (params, e)=>{
+    console.log("Delete", params)
+    // API Fetch DELETE
+    loadData()
+  }
+
+  const columns = [
+    { field: 'name', headerName: 'Nome', width: 150 },
+    { field: 'surname', headerName: 'Cognome', width: 150 },
+    { field: 'fullName',
+      width: 160,
+      headerName: 'Full name',
+      valueGetter: (params) =>{
+        //console.log(params)
+        return params.row.name + " " +params.row.surname
+      },
+      renderCell: (params)=>{
+        //console.log(params)
+        return <div className='circle-name-wrapper'>
+          {params.value.length < 14 ? <div className='circle-name'></div> :  <div className='circle-name green'></div>}
+          {params.value}
+        </div>
+      }
+    },
+    {
+      field: "Tools",
+      headerName: 'Tools',
+      renderCell: (params)=>{
+        //console.log(params)
+        return <div className='buttons'>
+          <button onClick={e=>onEditClick(params.row, e)}>Modifica</button>
+          <button onClick={e=>onDeleteClick(params.row, e)}>Elimina</button>
+        </div>
+      }
+    },
+  ]
 
   const loadData = async () =>{
     try{

@@ -2,13 +2,33 @@
   text-align: center;
 }
 
+.circle-name-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.circle-name{
+  width: 10px;
+  height: 10px;
+  background-color: yellow;
+  border-radius: 15px;
+  margin-right: 5px;
+}
+
+.circle-name.green{
+  background-color: green;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 .MuiDataGrid-root{
-  min-height: 200px;
+  height: 200px;
+  width: 500px;
   color: white !important;
 }
 
